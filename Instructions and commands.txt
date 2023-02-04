@@ -6,6 +6,7 @@
 
   sudo apt install libnginx-mod-rtmp
   cd /usr/src
+  sudo  apt-get install git
   sudo git clone https://github.com/arut/nginx-rtmp-module
   sudo cp /usr/src/nginx-rtmp-module/stat.xsl /var/www/html/stat.xsl
 
@@ -39,9 +40,9 @@ Copy and Paste followig lines
 
    
   Download Zip filre from link in Description
-  git clone https://github.com/solocomplex/hls-streaming.git
+ sudo git clone https://github.com/solocomplex/hls-streaming.git
 
-  cd //hls-streaming
+  cd hls-streaming
   sudo mv NginxSettings-VideoJS.zip /var/www/html/
   cd /var/www/html/
   sudo unzip NginxSettings-VideoJS.zip
@@ -50,8 +51,7 @@ Copy and Paste followig lines
 8.Edit Nginx configuration
 
   sudo rm /etc/nginx/nginx.conf
-  sudo mv nginx.conf /etc/nginx/      
-===>>> sudo cp /path to downloded file/nginx.conf /etc/nginx/
+  sudo cp /var/www/html/nginx.conf /etc/nginx/
 
   sudo rm /etc/nginx/sites-available/default
   sudo mv default /etc/nginx/sites-available/ 
