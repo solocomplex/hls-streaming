@@ -1,0 +1,85 @@
+1.sudo apt install nginx
+
+2.sudo apt update && sudo apt upgrade
+
+3.RTMP module
+
+  sudo apt install libnginx-mod-rtmp
+  cd /usr/src
+  sudo git clone https://github.com/arut/nginx-rtmp-module
+  sudo cp /usr/src/nginx-rtmp-module/stat.xsl /var/www/html/stat.xsl
+
+4.sudo nano /var/www/html/crossdomain.xml
+
+Copy and Paste followig lines
+
+<?xml version="1.0"?>
+<!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
+<cross-domain-policy>
+<allow-access-from domain="*"/>
+</cross-domain-policy>
+
+
+5. Make Directotries
+   sudo mkdir /var/livestream
+   sudo mkdir /var/livestream/hls
+   sudo chown -R www-data: /var/livestream
+ 
+ 6.Seting up ports to allow firewall use followig commans
+
+   sudo ufw allow 22/tcp
+   sudo ufw allow 80/tcp
+   sudo ufw allow 443/tcp
+   sudo ufw allow 10000/tcp
+   sudo ufw allow 1935
+   sudo ufw enable
+   sudo ufw status verbose
+
+7.VideoJS Support
+
+   
+  Download Zip filre from link in Description
+  git clone https://github.com/solocomplex/hls-streaming.git
+
+  cd //hls-streaming
+  sudo mv NginxSettings-VideoJS.zip /var/www/html/
+  cd /var/www/html/
+  sudo unzip NginxSettings-VideoJS.zip
+  sudo nano stream/index.html     ====>>>Put you IP adress of computer running Nginx and save file Ctrl+X
+
+8.Edit Nginx configuration
+
+  sudo rm /etc/nginx/nginx.conf
+  sudo mv nginx.conf /etc/nginx/      
+===>>> sudo cp /path to downloded file/nginx.conf /etc/nginx/
+
+  sudo rm /etc/nginx/sites-available/default
+  sudo mv default /etc/nginx/sites-available/ 
+
+check if any error  
+   sudo nginx -t
+   
+   thats All Done,
+
+ sudo systemctl restart nginx    or ===>>> sudo service restart nginx
+ sudo systemctl start nginx    or ===>>> sudo service start nginx
+ sudo systemctl stop nginx    or ===>>> sudo service stop nginx  
+
+Lets Check in Browser
+check your pc ip addres with following command
+
+ip addr show
+
+http://your-ip/         ====>>>>welcome page Nginx
+http://localhost/
+http://your-ip/videos   ====>>>Video Play List
+http://localhost/videos
+http://your-ip/stream   ====>>>Live Stream with Niginx
+http://localhost/stream
+http://your-ip/stat     ====>>>statics of Streaming Server
+http://localhost/stat
+
+
+Thank You So Much Good Luck
+
+
